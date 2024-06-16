@@ -3,6 +3,16 @@ entries:
   app-manifests:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-06-16T15:35:08.807718596Z"
+    description: A collection of manifests for any app
+    digest: b6adcf751558300db69d65844fb56d4cad9b1725004d28f584321906c21efa7e
+    name: app-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/app-manifests-1.0.0/app-manifests-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-06-16T15:25:02.03243145Z"
     description: A collection of manifests for any app
     digest: 9b14136ee8eb900ecd34d637e4d085f70eb2940b1b3b552c2317b98fb7c7c609
@@ -62,4 +72,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/contour-manifests-1.0.0/contour-manifests-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-16T15:25:02.032530093Z"
+generated: "2024-06-16T15:35:08.807733173Z"
