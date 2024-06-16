@@ -1,0 +1,17 @@
+{{- range .Values.httpProxies -}}
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ include "app-manifests.fullname" $ }}-{{ .name }}
+  labels:
+    {{- include "app-manifests.labels" $ | nindent 4 }}
+spec:
+  routes:
+    - enableWebsockets: {{ default false .enableWebsockets }}
+      services:
+        - name: {{ .service.name }}
+          port: {{ default 80 .service.port }}
+          {{- if .service.protocol }}
+          protocol: {{ .service.protocol }}
+          {{- end }}
+{{- end }}

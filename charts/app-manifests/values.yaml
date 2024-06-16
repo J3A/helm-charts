@@ -1,0 +1,8 @@
+httpProxies:
+  []
+  # - name: "name"
+  #   enableWebsockets: false
+  #   service:
+  #     name: "service-name"
+  #     port: 80
+  #     protocol: ""
