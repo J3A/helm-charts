@@ -104,6 +104,8 @@ config:
   cleanupArchiveUnreadDays: 180
   cleanupFrequencyHours: 24
   cleanupRemoveSessionsDays: 30
+  # user requires superadmin permissions to setup psql extensions
+  postgresqlUsername: postgres
 
 postgresql:
   enabled: true
@@ -111,7 +113,6 @@ postgresql:
     tag: 16.3.0-debian-12-r14
   serviceAccount:
     enabled: true
-  postgresqlPassword: CHANGEME
-  # user requires superadmin permissions to setup psql extensions
-  postgresqlUsername: postgres
-  postgresqlDatabase: miniflux
+  auth:
+    postgresPassword: CHANGEME
+    database: miniflux
