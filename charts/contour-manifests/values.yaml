@@ -1,6 +1,13 @@
 fullnameOverride: contour-manifests
 cloudflareOriginCASecretName: cloudflare-ca
 
+# ca.crt file as a string
+cloudflareCertificateAuthority: ""
+
+originCertificate:
+  cert: ""
+  key: ""
+
 # Manage root virtual hosts in the contour namespace only because:
 # - It's the only way to enforce clientValidation for Cloudflare's origin requests
 # - This way there is no need to have TLSCertificateDelegation

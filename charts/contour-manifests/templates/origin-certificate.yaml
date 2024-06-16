@@ -1,4 +1,4 @@
-{{- range .Values.cloudflareCertificates | default .Values.global.cloudflareCertificates }}
+{{- range .Values.originCertificate }}
 ---
 apiVersion: v1
 kind: Secret
@@ -8,7 +8,7 @@ metadata:
     {{- include "contour-manifests.labels" $ | nindent 4 }}
 type: kubernetes.io/tls
 data:
-  tls.crt: {{ .cert | b64enc }}
-  tls.key: {{ .key | b64enc }}
-  ca.crt: {{ $.Values.global.cloudflareCertificateAuthority | b64enc }}
+  tls.crt: {{ required "Origin tls.crt is required" .cert | b64enc }}
+  tls.key: {{ required "Origin tls.key is required" .key | b64enc }}
+  ca.crt: {{ required "Cloudflare ca.crt is required" $.Values.cloudflareCertificateAuthority | b64enc }}
 {{- end }}
