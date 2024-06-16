@@ -2,7 +2,7 @@
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: {{ include "app-manifests.fullname" $ }}-{{ .name }}
+  name: {{ include "app-manifests.name" $ }}-{{ .name }}
   labels:
     {{- include "app-manifests.labels" $ | nindent 4 }}
 spec:
