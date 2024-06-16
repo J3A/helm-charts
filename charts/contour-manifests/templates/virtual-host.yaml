@@ -1,0 +1,24 @@
+{{- range .Values.virtualHosts }}
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "contour-manifests.labels" $ | nindent 4 }}
+spec:
+  virtualhost:
+    {{- if .authorization }}
+    authorization: {{ .authorization | toYaml | nindent 6 }}
+    {{- end }}
+    {{- if .corsPolicy }}
+    corsPolicy: {{ .corsPolicy | toYaml | nindent 6 }}
+    {{- end }}
+    fqdn: {{ .fqdn }}
+    tls:
+      secretName: {{ default "origin-certificate-disruptor" .tlsSecretName }}
+      clientValidation:
+        caSecret: {{ $.Values.cloudflareOriginCASecretName }}
+  includes:
+    {{- .includes | toYaml | nindent 4 }}
+---
+{{- end }}

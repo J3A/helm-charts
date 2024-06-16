@@ -1,0 +1,14 @@
+{{- range .Values.cloudflareCertificates | default .Values.global.cloudflareCertificates }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: origin-certificate-{{ .certificateName }}
+  labels:
+    {{- include "contour-manifests.labels" $ | nindent 4 }}
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ .cert | b64enc }}
+  tls.key: {{ .key | b64enc }}
+  ca.crt: {{ $.Values.global.cloudflareCertificateAuthority | b64enc }}
+{{- end }}

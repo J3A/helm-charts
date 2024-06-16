@@ -1,0 +1,9 @@
+fullnameOverride: contour-manifests
+cloudflareOriginCASecretName: cloudflare-ca
+
+# Manage root virtual hosts in the contour namespace only because:
+# - It's the only way to enforce clientValidation for Cloudflare's origin requests
+# - This way there is no need to have TLSCertificateDelegation
+# See aliases: https://projectcontour.io/docs/main/config/virtual-hosts/#virtualhost-aliases
+# See inclusion & delegation: https://projectcontour.io/docs/main/config/inclusion-delegation/
+virtualHosts: []
