@@ -15,7 +15,7 @@ spec:
     {{- end }}
     fqdn: {{ .fqdn }}
     tls:
-      secretName: {{ default "origin-certificate-disruptor" .tlsSecretName }}
+      secretName: {{ default (include "contour-manifests.certificate-name" (first $.Values.originCertificates).certificateName) .tlsSecretName }}
       clientValidation:
         caSecret: {{ $.Values.cloudflareOriginCASecretName }}
   includes:

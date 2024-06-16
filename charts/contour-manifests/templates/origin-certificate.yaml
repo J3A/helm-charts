@@ -1,9 +1,9 @@
-{{- range .Values.originCertificate }}
+{{- range .Values.originCertificates }}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: origin-certificate-{{ .certificateName }}
+  name: {{ include "contour-manifests.certificate-name" .certificateName }}
   labels:
     {{- include "contour-manifests.labels" $ | nindent 4 }}
 type: kubernetes.io/tls

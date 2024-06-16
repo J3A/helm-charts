@@ -22,9 +22,10 @@ originCertificateAuthority: |
   XYZZ9m2c3fKwIenMMojL1eqydsgqj/wK4p5kagQ=
   -----END CERTIFICATE-----
 
-originCertificate:
-  cert: ""
-  key: ""
+originCertificates:
+  - certificateName: ""
+    cert: ""
+    key: ""
 
 # Manage root virtual hosts in the contour namespace only because:
 # - It's the only way to enforce clientValidation for Cloudflare's origin requests

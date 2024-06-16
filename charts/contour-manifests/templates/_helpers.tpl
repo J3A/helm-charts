@@ -60,3 +60,8 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{- define "contour-manifests.certificate-name" -}}
+{{- printf "%s-%s" "origin-certificate" . }}
+{{- end }}
