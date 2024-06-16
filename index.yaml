@@ -75,6 +75,22 @@ entries:
   miniflux:
   - apiVersion: v2
     appVersion: 2.1.3
+    created: "2024-06-16T17:25:36.246651943Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.5.5
+    description: Miniflux RSS feed reader chart
+    digest: cee82c7bc73ef3733a6e812295e92a5893d5d0887fee776760214838f253d488
+    icon: https://cdn-1.webcatalog.io/catalog/miniflux/miniflux-icon-filled-256.png
+    name: miniflux
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.5/miniflux-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: 2.1.3
     created: "2024-06-16T17:22:22.645118432Z"
     dependencies:
     - condition: postgresql.enabled
@@ -153,4 +169,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-16T17:22:22.645144891Z"
+generated: "2024-06-16T17:25:36.246772808Z"
