@@ -5,4 +5,4 @@ metadata:
   name: {{ .Values.cloudflareOriginCASecretName }}
   labels: {{ - include "contour-bootstrap.labels" $ | nindent 4 }}
 data:
-  ca.crt: {{ required "Cloudflare ca.crt is required" .Values.cloudflareCertificateAuthority | b64enc }}
+  ca.crt: {{ required "Cloudflare ca.crt is required" .Values.originCertificateAuthority | b64enc }}
