@@ -4,3 +4,4 @@ description: A collection of manifests for any app
 type: application
 version: 1.0.0
 appVersion: "0.0.0"
+icon: https://www.svgrepo.com/show/374177/vsixmanifest.svg
