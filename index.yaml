@@ -3,6 +3,17 @@ entries:
   app-manifests:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-06-16T20:11:07.123148031Z"
+    description: A collection of manifests for any app
+    digest: 1389c3807bdb4b9ce3375b82b36b8fe59e49e474373bceab6fa5bfc92d28356b
+    icon: https://www.svgrepo.com/show/374177/vsixmanifest.svg
+    name: app-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/app-manifests-1.0.2/app-manifests-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-06-16T20:06:36.433439295Z"
     description: A collection of manifests for any app
     digest: cba0b97a29aa3460a14993919539301d4251ce887c3b4b695c9d8e51b7494908
@@ -33,6 +44,17 @@ entries:
     - https://github.com/J3A/helm-charts/releases/download/app-manifests-0.1.0/app-manifests-0.1.0.tgz
     version: 0.1.0
   contour-manifests:
+  - apiVersion: v2
+    appVersion: 1.29.1
+    created: "2024-06-16T20:11:07.224702492Z"
+    description: Contour cluster resources
+    digest: 0e68cc1919340a052d4903aab63eab06a5cb84c82d1a2ceba6ce584a51157db1
+    icon: https://bitnami.com/assets/stacks/contour/img/contour-stack-220x234.png
+    name: contour-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/contour-manifests-2.0.4/contour-manifests-2.0.4.tgz
+    version: 2.0.4
   - apiVersion: v2
     appVersion: 1.29.1
     created: "2024-06-16T15:13:11.119321966Z"
@@ -196,4 +218,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-16T20:06:36.433476795Z"
+generated: "2024-06-16T20:11:07.224751042Z"
