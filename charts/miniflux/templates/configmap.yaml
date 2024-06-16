@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "miniflux.fullname" . }}
+  labels:
+    {{- include "miniflux.labels" . | nindent 4 }}
+data:
+  BATCH_SIZE: {{ .Values.config.batchSize | quote }}
+  CLEANUP_ARCHIVE_BATCH_SIZE: {{ .Values.config.cleanupArchiveBatchSize | quote }}
+  CLEANUP_ARCHIVE_READ_DAYS: {{ .Values.config.cleanupArchiveReadDays | quote }}
+  CLEANUP_ARCHIVE_UNREAD_DAYS: {{ .Values.config.cleanupArchiveUnreadDays | quote }}
+  CLEANUP_FREQUENCY_HOURS: {{ .Values.config.cleanupFrequencyHours | quote }}
+  CLEANUP_REMOVE_SESSIONS_DAYS: {{ .Values.config.cleanupRemoveSessionsDays | quote }}
+  CREATE_ADMIN: "1"
+  POLLING_FREQUENCY: {{ .Values.config.pollingFrequency | quote }}
+  RUN_MIGRATIONS: "1"
