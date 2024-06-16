@@ -3,6 +3,16 @@ entries:
   contour-manifests:
   - apiVersion: v2
     appVersion: 1.29.1
+    created: "2024-06-16T15:13:11.119321966Z"
+    description: Contour cluster resources
+    digest: 9012ee3b2f2c1c9509e2f4c99dcd31eb93ee5bdbb6c63e806b754f6783dfe2bc
+    name: contour-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/contour-manifests-2.0.3/contour-manifests-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
+    appVersion: 1.29.1
     created: "2024-06-16T14:49:12.159424533Z"
     description: Contour cluster resources
     digest: 26c7302d69ff4044be805fbafbf9e939153268767b5e2746da270895a2d8d14c
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/contour-manifests-1.0.0/contour-manifests-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-16T14:49:12.159445733Z"
+generated: "2024-06-16T15:13:11.119346752Z"
