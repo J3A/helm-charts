@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  actual-budget:
+  - apiVersion: v2
+    appVersion: 23.10.0
+    created: "2024-06-17T18:31:29.959234798Z"
+    description: Deploy Actual server
+    digest: 8c7becb6be7e040f5e6d4f3b13239debe0930f8a7ef30f2283f4e70b9cd2b6bd
+    icon: https://raw.githubusercontent.com/actualbudget/actual/master/packages/desktop-electron/icons/icon.png
+    name: actual-budget
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/actual-budget-1.0.0/actual-budget-1.0.0.tgz
+    version: 1.0.0
   app-manifests:
   - apiVersion: v2
     appVersion: 0.0.0
@@ -218,4 +230,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-16T20:11:07.224751042Z"
+generated: "2024-06-17T18:31:29.959290972Z"
