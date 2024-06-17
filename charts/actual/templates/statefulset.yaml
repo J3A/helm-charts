@@ -23,7 +23,9 @@ spec:
         resources:
           requests:
             storage: {{ .Values.storage.size }}
+        {{- if .Values.storage.className }}
         storageClassName: {{ .Values.storage.className }}
+        {{- end }}
   {{- end }}
   template:
     metadata:

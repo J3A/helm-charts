@@ -54,4 +54,4 @@ affinity: {}
 storage:
   enabled: no
   size: 1Gi
-  className: default
+  # className: your storage class name
