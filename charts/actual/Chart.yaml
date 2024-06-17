@@ -1,0 +1,7 @@
+apiVersion: v2
+name: actual-budget
+description: Deploy Actual server
+type: application
+version: 1.0.0
+icon: https://raw.githubusercontent.com/actualbudget/actual/master/packages/desktop-electron/icons/icon.png
+appVersion: "23.10.0"

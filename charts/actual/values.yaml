@@ -1,0 +1,57 @@
+image:
+  repository: actualbudget/actual-server
+  pullPolicy: IfNotPresent
+  tag: 23.10.0-alpine
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsGroup: 64087
+  runAsNonRoot: true
+  runAsUser: 64087
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsGroup: 64087
+  runAsNonRoot: true
+  runAsUser: 64087
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 50Mi
+  limits:
+    cpu: 150m
+    memory: 200Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+storage:
+  enabled: no
+  size: 1Gi
+  className: default
