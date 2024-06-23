@@ -7,8 +7,8 @@ metadata:
   labels:
     {{- include "contour-manifests.labels" $ | nindent 4 }}
 type: kubernetes.io/tls
-data:
-  tls.crt: {{ required "Origin tls.crt is required" .cert | b64enc }}
-  tls.key: {{ required "Origin tls.key is required" .key | b64enc }}
-  ca.crt: {{ required "Cloudflare ca.crt is required" $.Values.originCertificateAuthority | b64enc }}
+stringData:
+  tls.crt: {{ required "Origin tls.crt is required" .cert }}
+  tls.key: {{ required "Origin tls.key is required" .key }}
+  ca.crt: {{ .ca | default $.Values.cloudflareOriginCaRsaRoot }}
 {{- end }}

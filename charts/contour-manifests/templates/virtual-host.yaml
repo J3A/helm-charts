@@ -17,7 +17,7 @@ spec:
     tls:
       secretName: {{ default (include "contour-manifests.certificate-name" (first $.Values.originCertificates).certificateName) .tlsSecretName }}
       clientValidation:
-        caSecret: {{ $.Values.cloudflareOriginCASecretName }}
+        caSecret: {{ $.Values.cloudflareOriginPullCASecretName }}
   includes:
     {{- .includes | toYaml | nindent 4 }}
 ---
