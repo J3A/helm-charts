@@ -69,6 +69,17 @@ entries:
   contour-manifests:
   - apiVersion: v2
     appVersion: 1.29.1
+    created: "2024-06-23T15:57:59.429178186Z"
+    description: Contour cluster resources
+    digest: 1416725a19ff65908ac70c2e702e962b94cbae7ec1310e771fe152b082ef63d9
+    icon: https://bitnami.com/assets/stacks/contour/img/contour-stack-220x234.png
+    name: contour-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/contour-manifests-2.1.0/contour-manifests-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
+    appVersion: 1.29.1
     created: "2024-06-16T20:11:07.224702492Z"
     description: Contour cluster resources
     digest: 0e68cc1919340a052d4903aab63eab06a5cb84c82d1a2ceba6ce584a51157db1
@@ -241,4 +252,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-17T18:38:53.737776241Z"
+generated: "2024-06-23T15:57:59.429249149Z"
