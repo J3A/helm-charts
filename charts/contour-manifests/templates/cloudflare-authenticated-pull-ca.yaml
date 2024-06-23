@@ -4,5 +4,5 @@ type: Opaque
 metadata:
   name: {{ .Values.cloudflareOriginPullCASecretName }}
   labels: {{- include "contour-manifests.labels" $ | nindent 4 }}
-stringData:
-  ca.crt: {{ (required "Cloudflare authenticated origin ca.crt is required" .Values.authenticatedOriginPullCa) }}
+data:
+  ca.crt: {{ (required "Cloudflare authenticated origin ca.crt is required" .Values.authenticatedOriginPullCa) | b64enc }}
