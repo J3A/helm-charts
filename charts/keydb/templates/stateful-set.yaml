@@ -40,7 +40,7 @@ spec:
         {{- if .Values.image }}
         image: {{ .Values.image }}
         {{- else }}
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag | {{ .Chart.AppVersion }} }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag | .Chart.AppVersion }}
         {{- end }}
         image.pullPolicy: {{ .Values.image.pullPolicy }}
         command:
@@ -197,7 +197,7 @@ spec:
         {{- if .Values.image }}
         image: {{ .Values.image }}
         {{- else }}
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag | {{ .Chart.AppVersion }} }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag | .Chart.AppVersion }}
         {{- end }}
         image.pullPolicy: {{ .Values.image.pullPolicy }}
         command:
