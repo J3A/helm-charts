@@ -1,0 +1,16 @@
+{{- range .Values.networkPolicy.kubernetesApi  -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "{{ $.Release.Name }}-{{ .name }}-api-egress"
+  labels:
+    {{- include "app-manifests.labels" $ | nindent 4 }}
+spec:
+  description: Policy to allow egress to kube-apiserver
+  endpointSelector:
+    matchLabels:
+      {{- toYaml .matchLabels | nindent 6 }}
+  egress:
+    - toEntities:
+      - kube-apiserver
+{{- end -}}

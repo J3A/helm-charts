@@ -1,0 +1,18 @@
+{{ if .Values.networkPolicy.allowIntraNamespace -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.fullname" . }}-isolate
+  labels:
+    {{- include "app-manifests.labels" $ | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {}
+  ingress:
+    - fromEndpoints:
+      - matchLabels: {}
+  egress:
+    - toEndpoints:
+      - matchLabels: {}
+{{- end }}
