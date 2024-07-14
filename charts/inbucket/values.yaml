@@ -1,6 +1,6 @@
 image:
   repository: inbucket/inbucket
-  tag: stable
+  tag: ""
   pullPolicy: IfNotPresent
 
 service:
