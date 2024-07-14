@@ -2,7 +2,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: {{ include "app-manifests.fullname" . }}-isolate
+  name: {{ include "app-manifests.name" . }}-isolate
   labels:
     {{- include "app-manifests.labels" $ | nindent 4 }}
 spec:
