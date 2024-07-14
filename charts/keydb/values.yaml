@@ -236,9 +236,10 @@ serviceMonitor:
 # Redis exporter
 exporter:
   enabled: false
-  imageRepository: oliver006/redis_exporter
-  imageTag: v1.48.0-alpine
-  pullPolicy: IfNotPresent
+  image:
+    repository: oliver006/redis_exporter
+    tag: v1.48.0-alpine
+    pullPolicy: IfNotPresent
 
   # Prometheus port & scrape path
   port: 9121
