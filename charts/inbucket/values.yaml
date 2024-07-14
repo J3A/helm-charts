@@ -5,10 +5,6 @@ image:
 
 service:
   annotations: {}
-  clusterIP: ""
-  externalIPs: []
-  loadBalancerIP: ""
-  loadBalancerSourceRanges: []
   type: ClusterIP
   port:
     http: 9000

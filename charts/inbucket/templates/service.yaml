@@ -10,18 +10,6 @@ metadata:
 {{- end }}
 spec:
   type: "{{ .Values.service.type }}"
-  clusterIP: "{{ .Values.service.clusterIP }}"
-{{- if .Values.service.externalIPs }}
-  externalIPs:
-{{ toYaml .Values.service.externalIPs | indent 4 }}
-{{- end }}
-{{- if .Values.service.loadBalancerIP }}
-  loadBalancerIP: "{{ .Values.service.loadBalancerIP }}"
-{{- end }}
-{{- if .Values.service.loadBalancerSourceRanges }}
-  loadBalancerSourceRanges:
-{{ toYaml .Values.service.loadBalancerSourceRanges | indent 4 }}
-{{- end }}
   ports:
     - name: http
       port: {{ .Values.service.port.http }}
