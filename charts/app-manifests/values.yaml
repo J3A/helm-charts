@@ -9,7 +9,7 @@ httpProxies:
 
 networkPolicy:
   allowIntraNamespace: true
-  kubernetesApi: false
+  kubernetesApi: []
   ingress:
     fromNamespaces: []
   egress:
