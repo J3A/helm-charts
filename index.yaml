@@ -219,6 +219,29 @@ entries:
   keydb:
   - apiVersion: v2
     appVersion: 6.3.4
+    created: "2024-07-14T14:20:52.002242645Z"
+    description: A Helm chart for KeyDB multimaster setup
+    digest: 5244c5184fad64f06993c04f6e92852fbc049889dbf3eaefbe6632620cc4c0df
+    home: https://keydb.dev
+    icon: https://raw.githubusercontent.com/J3A/helm-charts/main/charts/keydb/keydb-icon.png
+    keywords:
+    - keydb
+    - redis
+    - keyvalue
+    - database
+    - multimaster
+    - HA
+    - high-availability
+    name: keydb
+    sources:
+    - https://j3a.github.io/helm-charts
+    - https://github.com/Snapchat/KeyDB
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/keydb-0.49.4/keydb-0.49.4.tgz
+    version: 0.49.4
+  - apiVersion: v2
+    appVersion: 6.3.4
     created: "2024-07-14T14:16:01.319408831Z"
     description: A Helm chart for KeyDB multimaster setup
     digest: 9d70552dc9064226a72053a2911ccd1ed5bbae87e987e68ebdc7e53bf830a7e0
@@ -422,4 +445,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-07-14T14:16:01.319519788Z"
+generated: "2024-07-14T14:20:52.002315542Z"
