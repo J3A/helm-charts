@@ -3,7 +3,7 @@ fullnameOverride: ""
 
 image:
   repository: eqalpha/keydb
-  tag: ""
+  tag: arm64_v6.3.4
   pullPolicy: IfNotPresent
   pullSecrets: []
 
