@@ -2,6 +2,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
+  # Official image as per https://docs.keydb.dev/docs/dockerfiles/
   repository: eqalpha/keydb
   tag: arm64_v6.3.4
   pullPolicy: IfNotPresent
@@ -176,15 +177,19 @@ persistentVolume:
 
 resources: {}
 
-# Please read https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/#enabling-unsafe-sysctls
-# before sysctls setup
+podSecurityContext: {}
+
 securityContext:
-  {}
-  # sysctls:
-  # - name: net.core.somaxconn
-  #   value: "512"
-  # - name: vm.overcommit_memory
-  #   value: "1"
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsGroup: 1001
+  runAsNonRoot: true
+  runAsUser: 1001
+  seccompProfile:
+    type: RuntimeDefault
 
 keydb:
   # Container security context
@@ -264,7 +269,17 @@ exporter:
   resources: {}
 
   # Container security context
-  securityContext: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsGroup: 1001
+    runAsNonRoot: true
+    runAsUser: 1001
+    seccompProfile:
+      type: RuntimeDefault
 
   # Additional args for redis exporter
   extraArgs:
@@ -279,7 +294,17 @@ scripts:
   # CPU/Memory resource limits/requests
   resources: {}
   # Container security context
-  securityContext: {}
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsGroup: 1001
+    runAsNonRoot: true
+    runAsUser: 1001
+    seccompProfile:
+      type: RuntimeDefault
   cleanupCoredumps:
     enabled: false
     minutes: 1440

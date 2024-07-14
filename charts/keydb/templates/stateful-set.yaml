@@ -121,7 +121,7 @@ spec:
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         securityContext:
-          {{- toYaml .Values.keydb.securityContext | nindent 10 }}
+          {{- toYaml .Values.securityContext | nindent 10 }}
         volumeMounts:
         - name: health
           mountPath: /health
@@ -231,7 +231,7 @@ spec:
       image.pullSecrets:
         {{- toYaml .Values.image.pullSecrets | nindent 8 }}
       securityContext:
-        {{- toYaml .Values.securityContext | nindent 8 }}
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       {{- if .Values.serviceAccount.enabled }}
       serviceAccountName: {{ include "keydb.serviceAccountName" . | quote }}
       {{- end }}
