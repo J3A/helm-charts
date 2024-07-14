@@ -2,7 +2,7 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "{{ include "app-manifests.name" . }}-{{ .name }}-api-egress"
+  name: {{ include "app-manifests.name" $ }}-{{ .name }}-api-egress
   labels:
     {{- include "app-manifests.labels" $ | nindent 4 }}
 spec:

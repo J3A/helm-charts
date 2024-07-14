@@ -4,7 +4,7 @@ kind: CiliumNetworkPolicy
 metadata:
   name: {{ include "app-manifests.name" . }}-isolate
   labels:
-    {{- include "app-manifests.labels" $ | nindent 4 }}
+    {{- include "app-manifests.labels" . | nindent 4 }}
 spec:
   endpointSelector:
     matchLabels:
