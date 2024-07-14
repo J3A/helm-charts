@@ -37,7 +37,7 @@ spec:
       {{- end }}
       containers:
       - name: keydb
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag | .Chart.AppVersion }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
         - /utils/server.sh
@@ -186,7 +186,7 @@ spec:
       {{- end }}
       {{- if .Values.scripts.enabled }}
       - name: scripts
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag | .Chart.AppVersion }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
         - /health/scripts_local.sh
