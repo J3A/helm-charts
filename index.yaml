@@ -26,6 +26,17 @@ entries:
   app-manifests:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-07-14T09:51:31.784986286Z"
+    description: A collection of manifests for any app
+    digest: 428dfa5ca7d7217bbdd708deebb6be8dfe0334c7a04b847f70b85a8e145196d3
+    icon: https://www.svgrepo.com/show/374177/vsixmanifest.svg
+    name: app-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/app-manifests-1.0.3/app-manifests-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-06-16T20:11:07.123148031Z"
     description: A collection of manifests for any app
     digest: 1389c3807bdb4b9ce3375b82b36b8fe59e49e474373bceab6fa5bfc92d28356b
@@ -263,4 +274,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-06-23T16:57:42.345054815Z"
+generated: "2024-07-14T09:51:31.785033405Z"
