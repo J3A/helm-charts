@@ -1,0 +1,14 @@
+{{ if .Values.ingress.allNamespaces -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" . }}-ingress-cluster
+  labels:
+    {{- include "app-manifests.labels" . | nindent 4 }}
+spec:
+  description: Allow ingress from any endpoint in cluster
+  endpointSelector: {}
+  ingress:
+    - fromEntities:
+      - cluster
+{{- end }}

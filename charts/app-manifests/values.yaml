@@ -11,6 +11,7 @@ networkPolicy:
   allowIntraNamespace: true
   kubernetesApi: []
   ingress:
+    allNamespaces: false
     fromNamespaces: []
   egress:
     world: []
