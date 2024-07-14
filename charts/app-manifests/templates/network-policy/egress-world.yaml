@@ -1,0 +1,16 @@
+{{- range .Values.networkPolicy.egress.world -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" $ }}-{{ .name }}-world
+  labels:
+    {{- include "app-manifests.labels" $ | nindent 4 }}
+spec:
+  description: Allow egress to world
+  endpointSelector:
+    matchLabels:
+      {{- toYaml .matchLabels | nindent 6 }}
+  egress:
+    - toEntities:
+        - world
+{{- end -}} 

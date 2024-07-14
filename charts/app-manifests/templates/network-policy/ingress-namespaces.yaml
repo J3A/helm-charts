@@ -1,0 +1,17 @@
+{{- if ne (len .Values.networkPolicy.ingress.fromNamespaces) 0 }}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" . }}-ingress-namespaces
+  labels:
+    {{- include "app-manifests.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels: {}
+  ingress:
+    {{- range $ns := .Values.networkPolicy.ingress.fromNamespaces }}
+    - fromEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: {{ $ns }}
+    {{- end }}
+{{- end }}

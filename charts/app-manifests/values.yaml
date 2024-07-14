@@ -10,7 +10,10 @@ httpProxies:
 networkPolicy:
   allowIntraNamespace: true
   kubernetesApi: false
+  ingress:
+    fromNamespaces: []
   egress:
+    world: []
     fqdn: []
     # - name: s3-scaleway
     #   matchNames:
