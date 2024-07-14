@@ -216,6 +216,27 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/contour-manifests-1.0.0/contour-manifests-1.0.0.tgz
     version: 1.0.0
+  inbucket:
+  - apiVersion: v2
+    appVersion: v3.0.4
+    created: "2024-07-14T14:57:25.01039365Z"
+    description: Inbucket is an email testing application
+    digest: c2104a71e959c77efe119b162cecc60c9caf58fa91b69a7f81b942dd91542eee
+    home: https://www.inbucket.org/
+    keywords:
+    - inbucket
+    - mail
+    - smtp
+    - pop3
+    - email
+    - testing
+    - disposable webmail
+    name: inbucket
+    sources:
+    - https://github.com/jhillyerd/inbucket
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/inbucket-0.1.0/inbucket-0.1.0.tgz
+    version: 0.1.0
   keydb:
   - apiVersion: v2
     appVersion: 6.3.4
@@ -491,4 +512,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-07-14T14:32:29.179137079Z"
+generated: "2024-07-14T14:57:25.01045727Z"
