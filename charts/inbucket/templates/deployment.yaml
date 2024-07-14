@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "inbucket.fullname" . }}
+  labels:
+    {{- include "inbucket.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "inbucket.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+    {{- if .Values.podAnnotations }}
+      annotations:
+{{ toYaml .Values.podAnnotations | indent 8 }}
+    {{- end }}
+      labels:
+        {{- include "inbucket.selectorLabels" . | nindent 8 }}    
+    spec:
+      serviceAccountName: {{ include "inbucket.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "inbucket.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+          envFrom:
+          - configMapRef:
+              name: {{ include "inbucket.name" . }}-configmap
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: smtp
+              containerPort: 2500
+              protocol: TCP
+            - name: pop3
+              containerPort: 1100
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: smtp
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: smtp
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          volumeMounts:
+            - mountPath: /config
+              name: config
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: config
+          emptyDir: {}
