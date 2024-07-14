@@ -1,0 +1,35 @@
+{{- range .Values.networkPolicy.egress.fqdn -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ template "ns-config.fullname" $ }}-fqdn-{{ .name }}
+  labels:
+    {{- include "ns-config.labels" $ | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- toYaml .matchLabels | nindent 6 }}
+  egress:
+    - toEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: kube-system
+          k8s-app: kube-dns
+      toPorts:
+      - ports:
+        - port: '53'
+          protocol: UDP
+        rules:
+          dns:
+            - matchPattern: "*"
+    - toFQDNs:
+        {{- range .matchNames }}
+        - matchName: {{ . }}
+        {{- end }}
+      {{- if .port }}
+      toPorts:
+        - ports:
+           - port: {{ .port | quote }}
+             protocol: ANY
+      {{- end }}
+---
+{{- end }}

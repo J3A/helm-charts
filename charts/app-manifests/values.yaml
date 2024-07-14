@@ -6,3 +6,13 @@ httpProxies:
   #     name: "service-name"
   #     port: 80
   #     protocol: ""
+
+networkPolicy:
+  kubernetesApi: false
+  egress:
+    fqdn: []
+    # - name: s3-scaleway
+    #   matchNames:
+    #     - s3.fr-par.scw.cloud
+    #   matchLabels:
+    #     app: my-app
