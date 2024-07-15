@@ -1,0 +1,140 @@
+# 
+# Patroni can use any control plane (zookeeper, etcd...). 
+# Zalando uses Kubernetes as control plane
+# Access to Kubernetes API is required
+# 
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: "{{ .Release.Name }}-api-egress"
+spec:
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" . }}
+  egress:
+    - toEntities:
+      - kube-apiserver
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "zalando-cluster.fullname" . }}-operator
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+spec:
+  description: Allow communication from operator
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" . }}
+  ingress:
+    - fromEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: {{ .Values.zalandoOperator.namespace }}
+          app.kubernetes.io/name: postgres-operator
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ template "zalando-cluster.fullname" . }}-s3
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" . }}
+  egress:
+    - toEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: kube-system
+          k8s-app: kube-dns
+      toPorts:
+      - ports:
+        - port: '53'
+          protocol: UDP
+        rules:
+          dns:
+            - matchPattern: "*"
+    - toFQDNs:
+        - matchName: {{ .Values.s3.endpoint }}
+      toPorts:
+        - ports:
+          - port: '443'
+            protocol: TCP
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ .Release.Namespace }}-{{ include "zalando-cluster.fullname" . }}
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+  namespace: {{ .Values.zalandoOperator.namespace }}
+spec:
+  description: Allow egress to cluster "{{ include "zalando-cluster.fullname" . }}" in namespace "{{ .Release.Namespace }}"
+  endpointSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgres-operator
+  egress:
+    - toEndpoints:
+      - matchLabels:
+          application: spilo
+          cluster-name: {{ include "zalando-cluster.clusterName" . }}    
+          k8s:io.kubernetes.pod.namespace: {{ .Release.Namespace }}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "zalando-cluster.fullname" . }}-operator-ingress
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+spec:
+  description: Allow ingress from operator
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" . }}
+  ingress:
+    - fromEndpoints:
+      - matchLabels:
+          name: postgres-operator
+          k8s:io.kubernetes.pod.namespace: {{ .Values.zalandoOperator.namespace }}
+---
+{{- if .Values.resticpostgresql.enabled }}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "zalando-cluster.fullname" $ }}-restic
+  labels:
+    {{- include "zalando-cluster.labels" $ | nindent 4 }}
+spec:
+  description: Allow ingress from restic backup
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" $ }}      
+  ingress:
+    - fromEndpoints:
+      - matchLabels:
+          app.kubernetes.io/name: restic-postgresql
+{{- end }}
+---
+{{- range $client := .Values.clients }}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "zalando-cluster.fullname" $ }}-{{ $client.name }}
+  labels:
+    {{- include "zalando-cluster.labels" $ | nindent 4 }}
+spec:
+  description: Allow ingress from {{ $client.name }}
+  endpointSelector:
+    matchLabels:
+      application: spilo
+      cluster-name: {{ include "zalando-cluster.clusterName" $ }}      
+  ingress:
+    - fromEndpoints:
+      - matchLabels:
+          {{- toYaml $client.matchLabels | nindent 10 }}
+{{ end -}}

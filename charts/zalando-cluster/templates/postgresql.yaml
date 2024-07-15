@@ -1,0 +1,63 @@
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+metadata:
+  name: {{ include "zalando-cluster.clusterName" . }}
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+    team: {{ .Values.teamId }}
+spec:
+  teamId: {{ .Values.teamId }}
+  {{- if .Values.cluster.dockerImage }}
+  dockerImage: {{ .Values.cluster.dockerImage }}
+  {{- end }}
+  numberOfInstances: {{ .Values.cluster.replicas }}
+  # needs setting on each cluster as per https://github.com/zalando/postgres-operator/issues/1359
+  spiloRunAsUser: 101
+  spiloRunAsGroup: 103
+  spiloFSGroup: 103
+  enableMasterLoadBalancer: {{ .Values.cluster.enableMasterLoadBalancer }}
+  enableReplicaLoadBalancer: {{ .Values.cluster.enableReplicaLoadBalancer }}
+  users:
+    {{- toYaml .Values.cluster.users | nindent 4 }}
+  databases:
+    {{- toYaml .Values.cluster.databases | nindent 4 }}
+  postgresql:
+    {{- toYaml .Values.cluster.postgresql | nindent 4 }}
+  podAnnotations:
+    {{- toYaml .Values.cluster.podAnnotations | nindent 4 }}
+  serviceAnnotations:
+    {{- toYaml .Values.cluster.serviceAnnotations | nindent 4 }}
+  enableLogicalBackup: {{ .Values.cluster.enableLogicalBackup }}
+  {{- if .Values.cluster.enableLogicalBackup }}
+  {{- if and .Values.cluster.enableLogicalBackup .Values.cluster.logicalBackupSchedule }}
+  logicalBackupSchedule: {{ .Values.cluster.logicalBackupSchedule }}
+  {{- end }}
+  {{- end }}
+  preparedDatabases: {{ .Values.cluster.preparedDatabases | toYaml | nindent 4 }}
+  volume:
+    {{- toYaml .Values.cluster.volume | nindent 4 }}
+  {{- if .Values.cluster.resources }}
+  resources:
+    {{- toYaml .Values.cluster.resources | nindent 4 }}
+  {{- end }}
+  tls: 
+    secretName: {{ include "zalando-cluster.certificateSecretName" . }}
+    certificateFile: tls.crt
+    privateKeyFile: tls.key
+    caFile: ca.crt
+  # NOTE: doesn't have right securityContext
+  # https://github.com/zalando/postgres-operator/issues/1722
+  # enableConnectionPooler: yes
+  patroni:
+    initdb:
+      encoding: "UTF8"
+      # US seems to be ok
+      # see: https://stackoverflow.com/questions/61357431/postgresql-installation-issue-character-type
+      locale: "en_US.UTF-8"
+      data-checksums: "true"
+    # postgresql:
+    #   authentication:
+    #     replication:
+    #       sslmode: disable
+    #     rewind:
+    #       sslmode: disable

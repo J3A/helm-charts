@@ -1,0 +1,16 @@
+{{- if .Values.environmentVariables.manageNamespaceConfig }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  # name: {{ include "zalando-cluster.clusterName" . }}"pod-environment-variables"
+  name: {{ .Values.environmentVariables.configMap }}
+  labels:
+    {{- include "zalando-cluster.labels" . | nindent 4 }}
+data:
+  USE_WALG_BACKUP: "true"
+  USE_WALG_RESTORE: "true"
+  AWS_ENDPOINT: {{ .Values.s3.endpoint }}
+  WALE_S3_ENDPOINT: {{ .Values.s3.endpoint }}
+  AWS_S3_FORCE_PATH_STYLE: "true"
+  AWS_REGION: {{ .Values.s3.region }}
+{{- end }}

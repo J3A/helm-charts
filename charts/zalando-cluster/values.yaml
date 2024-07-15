@@ -1,0 +1,51 @@
+teamId: "engineering"
+
+allowedPrincipals: []
+
+podServiceAccount: postgres-pod
+zalandoNodeClusterRole: zalando-allowed-setuid
+
+cluster:
+  name: "" #NOTE: add a cluster name
+  replicas: 2
+  dockerImage: ""
+  enableMasterLoadBalancer: no
+  enableReplicaLoadBalancer: no
+  podAnnotations: {}
+  serviceAnnotations: {}
+  enableLogicalBackup: yes
+  # logicalBackupSchedule: ""
+  preparedDatabases: {}
+  postgresql:
+    version: "16"
+  volume:
+    storageClass: ""
+    size: 1Gi
+  users: {}
+  databases: {}
+  resources: {}
+
+zalandoOperator:
+  namespace: zalando-postgres-operator
+
+s3:
+  endpoint: ""
+  region: ""
+  key: ""
+  secret: ""
+
+# as configured in the operator chart
+environmentVariables:
+  # There can only be one ConfigMap per namespace for pod env, and this chart creates one
+  # See: https://github.com/zalando/postgres-operator/issues/1566
+  manageNamespaceConfig: true
+  configMap: zalando-environment-variables
+  secret: zalando-environment-variables
+
+clients: []
+
+certificate:
+  organizations: []
+  issuerRef:
+    name: ""
+    kind: ClusterIssuer

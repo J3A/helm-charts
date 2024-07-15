@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "zalando-cluster.fullClusterName" . }}
+spec:
+  secretName: {{ include "zalando-cluster.certificateSecretName" . }}
+  duration: 144h # 6 days
+  renewBefore: 120h # 5d
+  subject:
+    organizations:
+      {{- .Values.certificate.organizations | toYaml | nindent 6 }}
+  isCA: false
+  commonName: zalando-operator
+  dnsNames:
+    - {{ include "zalando-cluster.fullClusterName" . }}
+    - {{ include "zalando-cluster.fullClusterName" . }}-repl
+    - {{ include "zalando-cluster.fullClusterName" . }}.{{ .Release.Namespace }}
+    - {{ include "zalando-cluster.fullClusterName" . }}-repl.{{ .Release.Namespace }}
+    - {{ include "zalando-cluster.fullClusterName" . }}.{{ .Release.Namespace }}.svc.cluster.local
+    - {{ include "zalando-cluster.fullClusterName" . }}-repl.{{ .Release.Namespace }}.svc.cluster.local
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  usages:
+    - digital signature
+    - key encipherment
+  issuerRef:
+    name: {{ required "Cert manager issuer name is required" .Values.certificate.issuerRef.name }}
+    kind: {{ .Values.certificate.issuerRef.kind }}
