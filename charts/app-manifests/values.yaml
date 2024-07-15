@@ -12,6 +12,7 @@ httpProxies:
 networkPolicy:
   allowIntraNamespace: true
   kubernetesApi: []
+  remoteNode: no
   ingress:
     world:
       enabled: no

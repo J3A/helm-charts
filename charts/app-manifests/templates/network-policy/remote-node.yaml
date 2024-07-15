@@ -1,0 +1,15 @@
+{{ if and .Values.networkPolicy.remoteNode -}}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" . }}-remote-node
+  labels:
+    {{- include "app-manifests.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels: {}
+  ingress:
+    - fromEntities:
+      - remote-node
+{{- end }}
+
