@@ -55,8 +55,9 @@ extraEnv:
   INBUCKET_POP3_DOMAIN: "inbucket"
   INBUCKET_POP3_TIMEOUT: "600s"
   INBUCKET_WEB_ADDR: "0.0.0.0:9000"
-  INBUCKET_WEB_UIDIR: "ui"
-  INBUCKET_WEB_GREETINGFILE: "ui/greeting.html"
+  # TODO: configure with volume. Use defaults for now
+  # INBUCKET_WEB_UIDIR: "ui"
+  # INBUCKET_WEB_GREETINGFILE: "ui/greeting.html"
   INBUCKET_WEB_TEMPLATECACHE: "true"
   INBUCKET_WEB_MAILBOXPROMPT: "@inbucket"
   INBUCKET_WEB_COOKIEAUTHKEY: ""
