@@ -1,4 +1,4 @@
-{{ if .Values.ingress.allNamespaces -}}
+{{ if .Values.networkPolicy.ingress.allNamespaces -}}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
