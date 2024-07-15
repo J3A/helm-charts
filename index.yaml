@@ -616,4 +616,16 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-07-15T19:13:58.866283774Z"
+  zalando-cluster:
+  - apiVersion: v2
+    appVersion: 1.12.2
+    created: "2024-07-15T19:45:36.851090974Z"
+    description: Zalando cluster manifest deployment with configuration
+    digest: 1886952f2e8f7903cb05b98b61bcc6ed3dcd5267e51bb090a438f2ed3653f13b
+    icon: https://raw.githubusercontent.com/zalando/postgres-operator/f2dddb0f2bea3951181566b30d4560b49c684d08/docs/diagrams/logo.png
+    name: zalando-cluster
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-15T19:45:36.851202363Z"
