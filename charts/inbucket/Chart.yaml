@@ -1,7 +1,7 @@
 apiVersion: v2
 description: Inbucket is an email testing application
 name: inbucket
-version: 0.1.2
+version: 0.1.3
 appVersion: 3.0.4
 keywords:
   - inbucket
