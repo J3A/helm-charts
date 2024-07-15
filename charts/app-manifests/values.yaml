@@ -1,6 +1,8 @@
 httpProxies:
   []
   # - name: "name"
+  #   virtualHost:
+  #     fqdn: "svc.example.com"
   #   enableWebsockets: false
   #   service:
   #     name: "service-name"
@@ -11,6 +13,13 @@ networkPolicy:
   allowIntraNamespace: true
   kubernetesApi: []
   ingress:
+    world:
+      enabled: no
+      matchLabels: {}
+      controller:
+        namespace: contour
+        matchLabels:
+          app.kubernetes.io/component: envoy
     allNamespaces: false
     fromNamespaces: []
   egress:

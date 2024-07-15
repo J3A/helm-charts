@@ -1,0 +1,18 @@
+{{ if .Values.networkPolicy.ingress.world.enabled -}}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" . }}-ingress-controller
+  labels:
+    {{- include "app-manifests.labels" . | nindent 4 }}
+spec:
+  description: Allow traffic from world via ingress controller
+  endpointSelector:
+    matchLabels:
+      {{- .Values.networkPolicy.ingress.world.matchLabels | toYaml | nindent 6 }}
+  ingress:
+    - fromEndpoints:
+      - matchLabels:
+          k8s:io.kubernetes.pod.namespace: {{ .Values.networkPolicy.ingress.world.controller.namespace }}
+          {{- .Values.networkPolicy.ingress.world.controller.matchLabels | toYaml | nindent 10 }}
+{{- end }}

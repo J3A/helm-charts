@@ -6,6 +6,10 @@ metadata:
   labels:
     {{- include "app-manifests.labels" $ | nindent 4 }}
 spec:
+  {{- if .virtualHost }}
+  virtualhost:
+    {{- .virtualHost | toYaml | nindent 4 }}
+  {{- end }}
   routes:
     - enableWebsockets: {{ default false .enableWebsockets }}
       services:
