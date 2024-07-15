@@ -101,25 +101,6 @@ spec:
           name: postgres-operator
           k8s:io.kubernetes.pod.namespace: {{ .Values.zalandoOperator.namespace }}
 ---
-{{- if .Values.resticpostgresql.enabled }}
-apiVersion: "cilium.io/v2"
-kind: CiliumNetworkPolicy
-metadata:
-  name: {{ include "zalando-cluster.fullname" $ }}-restic
-  labels:
-    {{- include "zalando-cluster.labels" $ | nindent 4 }}
-spec:
-  description: Allow ingress from restic backup
-  endpointSelector:
-    matchLabels:
-      application: spilo
-      cluster-name: {{ include "zalando-cluster.clusterName" $ }}      
-  ingress:
-    - fromEndpoints:
-      - matchLabels:
-          app.kubernetes.io/name: restic-postgresql
-{{- end }}
----
 {{- range $client := .Values.clients }}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
