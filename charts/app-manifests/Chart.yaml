@@ -2,6 +2,6 @@ apiVersion: v2
 name: app-manifests
 description: A collection of manifests for any app
 type: application
-version: 1.1.1
+version: 1.2.0
 appVersion: "0.0.0"
 icon: https://www.svgrepo.com/show/374177/vsixmanifest.svg

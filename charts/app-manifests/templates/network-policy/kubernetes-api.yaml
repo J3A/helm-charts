@@ -2,15 +2,18 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: {{ include "app-manifests.name" $ }}-{{ .name }}-api-egress
+  name: {{ include "app-manifests.name" $ }}-{{ .name }}-api
   labels:
     {{- include "app-manifests.labels" $ | nindent 4 }}
 spec:
-  description: Policy to allow egress to kube-apiserver
+  description: Policy to allow communication to kube-apiserver
   endpointSelector:
     matchLabels:
       {{- toYaml .matchLabels | nindent 6 }}
   egress:
     - toEntities:
+      - kube-apiserver
+  ingress:
+    - fromEntities:
       - kube-apiserver
 {{- end -}}
