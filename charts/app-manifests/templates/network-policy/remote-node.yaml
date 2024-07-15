@@ -8,6 +8,9 @@ metadata:
 spec:
   endpointSelector:
     matchLabels: {}
+  egress:
+    - toEntities:
+      - remote-node
   ingress:
     - fromEntities:
       - remote-node
