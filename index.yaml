@@ -252,6 +252,26 @@ entries:
   inbucket:
   - apiVersion: v2
     appVersion: 3.0.4
+    created: "2024-07-15T16:51:32.7553833Z"
+    description: Inbucket is an email testing application
+    digest: 32ef50d67cfbdf5de35172b0ef5cd62be2a2ea98706319eaf5f87444c3f85f06
+    home: https://www.inbucket.org/
+    keywords:
+    - inbucket
+    - mail
+    - smtp
+    - pop3
+    - email
+    - testing
+    - disposable webmail
+    name: inbucket
+    sources:
+    - https://github.com/jhillyerd/inbucket
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/inbucket-0.1.3/inbucket-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 3.0.4
     created: "2024-07-14T15:11:01.674782682Z"
     description: Inbucket is an email testing application
     digest: 0aba8f65ea05ab590e6acd43084fe58aa86242626fbafa6b1e093204a681d919
@@ -585,4 +605,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
-generated: "2024-07-15T16:44:05.000690952Z"
+generated: "2024-07-15T16:51:32.75549521Z"
