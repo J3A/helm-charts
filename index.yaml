@@ -619,6 +619,17 @@ entries:
   zalando-cluster:
   - apiVersion: v2
     appVersion: 1.12.2
+    created: "2024-07-15T20:07:36.965497133Z"
+    description: Zalando cluster manifest deployment with configuration
+    digest: fff62358e696e48987c05922521dc11083f2576aca6b0995b3fc02a632db630e
+    icon: https://raw.githubusercontent.com/zalando/postgres-operator/f2dddb0f2bea3951181566b30d4560b49c684d08/docs/diagrams/logo.png
+    name: zalando-cluster
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.1/zalando-cluster-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.12.2
     created: "2024-07-15T19:45:36.851090974Z"
     description: Zalando cluster manifest deployment with configuration
     digest: 1886952f2e8f7903cb05b98b61bcc6ed3dcd5267e51bb090a438f2ed3653f13b
@@ -628,4 +639,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-15T19:45:36.851202363Z"
+generated: "2024-07-15T20:07:36.965593413Z"
