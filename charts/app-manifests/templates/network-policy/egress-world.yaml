@@ -9,7 +9,7 @@ spec:
   description: Allow egress to world
   endpointSelector:
     matchLabels:
-      {{- toYaml .matchLabels | nindent 6 }}
+      {{- toYaml (default dict .matchLabels) | nindent 6 }}
   egress:
     - toEntities:
         - world

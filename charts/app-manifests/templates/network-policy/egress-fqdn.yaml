@@ -8,7 +8,7 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      {{- toYaml .matchLabels | nindent 6 }}
+      {{- toYaml (default dict .matchLabels) | nindent 6 }}
   egress:
     - toEndpoints:
       - matchLabels:
