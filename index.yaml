@@ -26,6 +26,17 @@ entries:
   app-manifests:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-07-16T19:32:31.170466809Z"
+    description: A collection of manifests for any app
+    digest: 34769aacd36908239653bc2fbc810247d4fb034bca3f38054591eadd5ee77efb
+    icon: https://www.svgrepo.com/show/374177/vsixmanifest.svg
+    name: app-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/app-manifests-1.4.1/app-manifests-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-07-16T19:23:09.68160824Z"
     description: A collection of manifests for any app
     digest: 8d4a55ef009b577f6cf35ea93018f33a7ce667c980dbf4583b4485b6cb734e81
@@ -672,4 +683,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-16T19:23:09.681780584Z"
+generated: "2024-07-16T19:32:31.170674729Z"
