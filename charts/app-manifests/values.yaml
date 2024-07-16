@@ -31,6 +31,7 @@ networkPolicy:
   egress:
     world: []
     fqdn: []
+    namespaces: []
     # - name: s3-scaleway
     #   matchNames:
     #     - s3.fr-par.scw.cloud
