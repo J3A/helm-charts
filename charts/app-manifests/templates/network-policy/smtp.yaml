@@ -1,0 +1,31 @@
+{{- range .Values.networkPolicy.smtp }}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "app-manifests.name" $ }}-{{ .name }}-smtp
+  labels:
+    {{- include "app-manifests.labels" $ | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- toYaml .matchLabels | nindent 6 }}
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+          - port: '53'
+            protocol: UDP
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toFQDNs:
+        - matchName: {{ .fqdn }}
+      toPorts:
+        - ports:
+          - port: '587'
+            protocol: ANY
+---
+{{- end }}

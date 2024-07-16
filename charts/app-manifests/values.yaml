@@ -13,6 +13,11 @@ networkPolicy:
   allowIntraNamespace: true
   kubernetesApi: []
   remoteNode: no
+  smtp:
+    []
+    # - name: smtp-app
+    #   fqdn: smtp.eu.mailgun.org
+    #   matchLabels: {}
   ingress:
     world:
       enabled: no
