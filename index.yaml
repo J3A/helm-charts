@@ -660,6 +660,18 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/miniflux-1.0.0/miniflux-1.0.0.tgz
     version: 1.0.0
+  postgresql-restic:
+  - apiVersion: v2
+    appVersion: v15.2.0-restic-0.15.1
+    created: "2024-07-17T17:49:08.652109406Z"
+    description: Logical backups of postgresql
+    digest: ed3d8ced32d375abc379d3bca0dd7acad7ab97103da8a290db3300065078893a
+    icon: https://avatars.githubusercontent.com/u/10073512
+    name: postgresql-restic
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/postgresql-restic-1.0.0/postgresql-restic-1.0.0.tgz
+    version: 1.0.0
   zalando-cluster:
   - apiVersion: v2
     appVersion: 1.12.2
@@ -683,4 +695,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-16T19:32:31.170674729Z"
+generated: "2024-07-17T17:49:08.65223382Z"
