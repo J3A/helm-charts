@@ -672,6 +672,18 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/postgresql-restic-1.0.0/postgresql-restic-1.0.0.tgz
     version: 1.0.0
+  restic-postgresql:
+  - apiVersion: v2
+    appVersion: v15.2.0-restic-0.15.1
+    created: "2024-07-17T17:58:42.540405473Z"
+    description: Logical backups of postgresql
+    digest: e2260b4b3c61c7dc1683dd51ae58a1199c62dc454a254aded5d31beb1842f3c0
+    icon: https://avatars.githubusercontent.com/u/10073512
+    name: restic-postgresql
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/restic-postgresql-1.0.0/restic-postgresql-1.0.0.tgz
+    version: 1.0.0
   zalando-cluster:
   - apiVersion: v2
     appVersion: 1.12.2
@@ -695,4 +707,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-17T17:49:08.65223382Z"
+generated: "2024-07-17T17:58:42.540518765Z"
