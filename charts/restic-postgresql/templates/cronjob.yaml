@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "restic-postgresql.serviceAccountName" . }}
+  labels:
+    {{- include "restic-postgresql.labels" . | nindent 4 }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.backoffLimit }}
+      template:
+        {{- with .Values.imagePullSecrets }}
+        imagePullSecrets:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        metadata:
+        {{- if .Values.podAnnotations }}
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+            {{- if .Values.withIstio }}
+            sidecar.istio.io/rewriteAppHTTPProbers: "false"
+            {{- end }}
+          {{- end }}
+        {{- else if .Values.withIstio }}
+          annotations:
+            sidecar.istio.io/rewriteAppHTTPProbers: "false"
+        {{- else if not .Values.withLinkerd }}
+          annotations:
+            linkerd.io/inject: disabled
+        {{- end }}
+          labels:
+            {{- include "restic-postgresql.selectorLabels" . | nindent 12 }}
+        spec:
+          serviceAccountName: {{ include "restic-postgresql.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ .Chart.Name }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}          
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              envFrom:
+                - configMapRef:
+                    name: {{ include "restic-postgresql.fullname" . }}
+                - secretRef:
+                    name: {{ include "restic-postgresql.fullname" . }}
+              env:
+                - name: POSTGRESQL_HOST
+                  value: {{ .Values.zalandoCluster.team }}-zalando-{{ .Values.zalandoCluster.name }}{{ if .Values.zalandoCluster.useReplica }}-repl{{ end }}
+                - name: POSTGRESQL_PORT
+                  value: {{ quote .Values.zalandoCluster.port }}
+                - name: POSTGRESQL_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "restic-postgresql.zalandoSecretName" . }}
+                      key: username
+                - name: POSTGRESQL_PWD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "restic-postgresql.zalandoSecretName" . }}
+                      key: password
+                - name: POSTGRESQL_DB
+                  value: {{ .Values.zalandoCluster.db }}
+                - name: PGSSLROOTCERT
+                  value: /etc/ssl/certs/zalando.pem
+              {{- if .Values.withIstio }}              
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  until curl -fsI http://localhost:15021/healthz/ready; do echo \"Waiting for Sidecar...\"; sleep 3; done;
+                  echo \"Sidecar available. Running the command...\";
+                  /etc/restic/backup.sh;
+                  x=$(echo $?); curl -fsI -X POST http://localhost:15020/quitquitquit && exit $x
+              {{- else if .Values.withLinkerd }}
+              command: ["/linkerd-await", "--shutdown", "--"]
+              args: ["/bin/bash", "/etc/restic/backup.sh"]
+              {{- end }}
+              {{- if .Values.extraVolumeMounts }}
+              volumeMounts:
+                {{- toYaml .Values.extraVolumeMounts | nindent 16 }}
+              {{- end }}
+          restartPolicy: {{ .Values.restartPolicy }}
+          {{- with .Values.extraVolumes }}
+          volumes:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

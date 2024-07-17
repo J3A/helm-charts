@@ -1,0 +1,75 @@
+image:
+  repository: docker.io/j3asolutions/restic-postgresql
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+# NOTE: if changing name this may affect network policy in zalando-cluster chart
+nameOverride: ""
+fullnameOverride: ""
+
+podSecurityContext: {}
+
+securityContext:
+  runAsNonRoot: true
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+podAnnotations: {}
+
+serviceAccount:
+  create: true
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+schedule: "0 4 * * *"
+backoffLimit: 3
+restartPolicy: OnFailure
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 1
+concurrencyPolicy: Forbid
+
+awsAccessKeyId: ""
+awsSecretAccessKey: ""
+
+storage:
+  s3Endpoint: s3.eu-central-003.backblazeb2.com
+  bucket: CHANGEME
+
+restic:
+  # filename: postgresql_dump
+  password: CHANGEME
+  prune: yes
+  keepLast: 100
+  sslMode: verify-full
+
+zalandoCluster:
+  name: CHANGEME
+  port: 5432
+  useReplica: no
+  db: CHANGEME
+  user: ""
+  team: engineering
+
+withIstio: false
+withLinkerd: false
+
+extraVolumes:
+  - name: certificate
+    configMap:
+      name: disruptor-london-ca
+
+extraVolumeMounts:
+  - name: certificate
+    mountPath: /etc/ssl/certs/zalando.pem
+    subPath: ca.crt
+    readOnly: true
