@@ -9,8 +9,14 @@ metadata:
 data:
   USE_WALG_BACKUP: "true"
   USE_WALG_RESTORE: "true"
+  {{- if .Values.s3.endpoint }}
   AWS_ENDPOINT: {{ .Values.s3.endpoint }}
+  {{- end }}
+  {{- if .Values.s3.endpoint }}
   WALE_S3_ENDPOINT: {{ .Values.s3.endpoint }}
+  {{- end }}  
   AWS_S3_FORCE_PATH_STYLE: "true"
+  {{- if .Values.s3.region }}
   AWS_REGION: {{ .Values.s3.region }}
+  {{- end }}
 {{- end }}
