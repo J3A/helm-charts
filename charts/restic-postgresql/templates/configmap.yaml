@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "restic-postgresql.fullname" . }}
+  labels:
+    {{- include "restic-postgresql.labels" . | nindent 4 }}
+data:
+  PGSSLMODE: {{ default "verify-full" .Values.zalandoCluster.sslMode }}
+  S3_ENDPOINT: {{ include "restic-postgresql.s3Endpoint" . }}
+  BUCKET_NAME: {{ .Values.storage.bucket }} 
+  FILENAME: {{ .Values.zalandoCluster.name }}
+  {{- if .Values.restic.prune }}
+  ENABLE_PRUNE: "1"
+  KEEP_LAST: {{ .Values.restic.keepLast | quote}} 
+  {{- else -}}
+  ENABLE_PRUNE: "0"
+  {{- end }}
+    
