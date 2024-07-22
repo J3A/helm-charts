@@ -55,6 +55,22 @@ spec:
       # see: https://stackoverflow.com/questions/61357431/postgresql-installation-issue-character-type
       locale: "en_US.UTF-8"
       data-checksums: "true"
+    {{- if .Values.insecureMode }}
+    # replication is defined as hostnossl 
+    # to make sure there is no double encryption with istio as
+    # the commented lines below are not supported by Zalando
+    pg_hba:
+      - local       all             all                             trust
+      - hostssl     all             +zalandos    127.0.0.1/32       pam
+      - hostssl     all             +zalandos    ::1/128            pam
+      - hostssl     all             +zalandos    all                pam
+      - hostssl     all             +postgres    ::1/128            md5
+      - hostssl     all             +postgres    all                md5
+      - host        all             all          127.0.0.1/32       md5
+      - host        all             all          ::1/128            md5
+      - hostnossl   replication     standby      all                md5
+      - hostnossl   all             all          all                md5
+    {{- end }}
     # postgresql:
     #   authentication:
     #     replication:
