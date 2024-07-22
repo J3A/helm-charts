@@ -2,6 +2,6 @@ apiVersion: v2
 name: zalando-cluster
 description: Zalando cluster manifest deployment with configuration
 type: application
-version: 0.2.0
+version: 0.2.1
 appVersion: 1.12.2
 icon: https://raw.githubusercontent.com/zalando/postgres-operator/f2dddb0f2bea3951181566b30d4560b49c684d08/docs/diagrams/logo.png

@@ -45,7 +45,7 @@ environmentVariables:
 clients: []
 
 certificate:
-  insecureMode: yes
+  insecureMode: no
   organizations: []
   issuerRef:
     name: ""
