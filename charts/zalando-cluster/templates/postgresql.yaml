@@ -55,7 +55,7 @@ spec:
       # see: https://stackoverflow.com/questions/61357431/postgresql-installation-issue-character-type
       locale: "en_US.UTF-8"
       data-checksums: "true"
-    {{- if .Values.insecureMode }}
+    {{- if .Values.certificate.insecureMode }}
     # replication is defined as hostnossl 
     # to make sure there is no double encryption with istio as
     # the commented lines below are not supported by Zalando
