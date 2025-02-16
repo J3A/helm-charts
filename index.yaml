@@ -223,6 +223,17 @@ entries:
   contour-manifests:
   - apiVersion: v2
     appVersion: 1.29.1
+    created: "2025-02-16T22:20:46.167692137Z"
+    description: Contour cluster resources
+    digest: 12b5755d579f08443a4a82434a07936f7b5ab45e91dad79c138657c50d157e78
+    icon: https://bitnami.com/assets/stacks/contour/img/contour-stack-220x234.png
+    name: contour-manifests
+    type: application
+    urls:
+    - https://github.com/J3A/helm-charts/releases/download/contour-manifests-2.4.1/contour-manifests-2.4.1.tgz
+    version: 2.4.1
+  - apiVersion: v2
+    appVersion: 1.29.1
     created: "2025-02-16T22:17:04.253965611Z"
     description: Contour cluster resources
     digest: 9ccad9facc93d5e570dcb9034cf9aa8b8a6a4751afa5d48466adf0fab922b3ee
@@ -784,4 +795,4 @@ entries:
     urls:
     - https://github.com/J3A/helm-charts/releases/download/zalando-cluster-0.1.0/zalando-cluster-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-16T22:17:04.254086407Z"
+generated: "2025-02-16T22:20:46.167821888Z"
