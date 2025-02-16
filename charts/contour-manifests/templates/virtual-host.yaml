@@ -14,13 +14,13 @@ spec:
     corsPolicy: {{ .corsPolicy | toYaml | nindent 6 }}
     {{- end }}
     fqdn: {{ .fqdn }}
-    {{- if ne .tls.disabled false }}
-    tls:
-      secretName: {{ default (include "contour-manifests.certificate-name" (first $.Values.originCertificates).certificateName) .tlsSecretName }}
-      {{- if ne .clientValidationDisabled true }}
-      clientValidation:
-        caSecret: {{ $.Values.cloudflareOriginPullCASecretName }}
-      {{- end }}
+    {{- if not .tls.disabled }}
+      tls:
+        secretName: {{ default (include "contour-manifests.certificate-name" (first $.Values.originCertificates).certificateName) .tlsSecretName }}
+        {{- if not .clientValidationDisabled }}
+        clientValidation:
+          caSecret: {{ $.Values.cloudflareOriginPullCASecretName }}
+        {{- end }}
     {{- end }}
   includes:
     {{- .includes | toYaml | nindent 4 }}
